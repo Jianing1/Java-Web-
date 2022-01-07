@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>景点详情</title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="Your description" name="description"/>
+    <meta content="Your keywords" name="keywords"/>
+    <meta content="Your name" name="author"/>
+    <link rel="stylesheet" th:href="@{/css/style1.css}">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script th:inline="javascript" type="text/javascript">
+        var id = [[${oneAttr.id}]];
+        $(function () {
+            $('#table_refresh').load("/hotel/local?id=" + id);
+            //alert(id)
+        })
+        $(function () {
+            //得到当前时间
+            var date_now = new Date();
+            //得到当前年份
+            var year = date_now.getFullYear();
+            //得到当前月份
+            //注：
+            //  1：js中获取Date中的month时，会比当前月份少一个月，所以这里需要先加一
+            //  2: 判断当前月份是否小于10，如果小于，那么就在月份的前面加一个 '0' ， 如果大于，就显示当前月份
+            var month = date_now.getMonth() + 1 < 10 ? "0" + (date_now.getMonth() + 1) : (date_now.getMonth() + 1);
+            //得到当前日子（多少号）
+            var date = date_now.getDate() < 10 ? "0" + date_now.getDate() : date_now.getDate();
+
+            //设置input标签的max属性
+            $("#begin").attr("min", year + "-" + month + "-" + date);
+            $("#end").attr("min", year + "-" + month + "-" + date);
+
+        })
+
+        function pay() {
+
+            var qty = document.getElementById("qty").value;
+            var begin = $("#begin").val()
+            var end = $("#end").val()
+
+            if (begin == null || begin === "" || end == null) {
+                alert("时间不能为空！")
+                return
+            }
+            var data = JSON.stringify({id: id, qty: qty, begin: begin, end: end})
+            $.ajax({
+                type: "POST",
+                url: "/hotelorders",
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code === 0) {
+                        swal("下单成功", "You clicked the button!", "success");
+                    } else if (result.code === 203) {
+                        swal("权限不足", "请先登录，亲")
+                        //top.location='/dist/login'
+                    } else if (result.code === 201) {
+                        swal("库存不足", "You clicked the button!", "error");
+                    } else {
+                        swal("系统故障", "程序出错....");
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body class="single-product-page">
+<!-- head 头部 -->
+<div id="head" th:include="common/index_header :: copyheader"></div>
+<br>
+<!-- Main Container -->
+<section class="main-container col1-layout">
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-main">
+                    <div class="product-view">
+                        <div class="product-essential">
+                            <form action="#" id="product" method="post">
+                                <div class="product-img-box col-lg-5 col-sm-6 col-xs-12">
+                                    <div class="new-label new-top-left"> New</div>
+                                    <div class="product-image">
+                                        <div class="product-full"><img alt="product-image" data-zoom-image="images/products/img02.jpg"
+                                                                       id="product-zoom"
+                                                                       src="images/products/img02.jpg"
+                                                                       th:src="@{${oneAttr.img}}"></div>
+                                    </div>
+                                </div>
+                                <div class="product-shop col-lg-7 col-sm-6 col-xs-12">
+                                    <div class="product-name">
+                                        <h1 th:text="${oneAttr.name}"></h1>
+                                    </div>
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                            class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                            class="fa fa-star-o"></i>
+                                        <p class="rating-links"><a href="#">4 Review(s)</a> <span
+                                                class="separator">|</span> <a href="#"><i class="fa fa-pencil"></i>
+                                            write a review</a></p>
+                                    </div>
+                                    <div class="price-block">
+                                        <div class="price-box">
+                                            <p class="special-price"><span class="price-label">Special Price</span>
+                                                <span class="price" id="product-price-48"> $<span
+                                                        th:text="${oneAttr.price}"></span> </span></p>
+                                        </div>
+                                    </div>
+                                    <div class="info-orther">
+                                        <p hidden>宾馆Id: <span id="id" name="id" th:text="${oneAttr.id}"></span></p>
+                                        <p>剩余房间: <span class="in-stock" th:text="${oneAttr.bed}"></span></p>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class='col-sm-6'>
+                                            <div class="form-group">
+                                                <label>入住时间：</label>
+                                                <!--指定 date标记-->
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <label for="begin"></label><input class="form-control" id="begin" required="required"
+                                                                                      type=Date/>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='col-sm-6'>
+                                            <div class="form-group">
+                                                <label>离开时间：</label>
+                                                <!--指定 date标记-->
+                                                <div class='input-group date' id='datetimepicker2'>
+                                                    <input class="form-control" id="end" required="required" type=Date/>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="short-description">
+                                        <h2>景点概述</h2>
+                                        <p th:text="${oneAttr.miaoshu}"></p>
+                                    </div>
+                                    <div class="form-option">
+                                        <div class="add-to-box">
+                                            <div class="add-to-cart">
+                                                <div class="pull-left">
+                                                    <div class="custom pull-left">
+                                                        <label>房间 :</label>
+                                                        <button class="reduced items-count"
+                                                                onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) result.value--;return false;" type="button"><i
+                                                                class="fa fa-minus">&nbsp;</i></button>
+                                                        <input class="input-text qty" id="qty" maxlength="12" name="qty"
+                                                               title="Qty" type="text" value="1">
+                                                        <button class="increase items-count"
+                                                                onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" type="button"><i
+                                                                class="fa fa-plus">&nbsp;</i></button>
+                                                    </div>
+                                                </div>
+                                                <button class="button btn-cart" name="btn" onClick="pay();"
+                                                        title="Add to Cart" type="button">立即下单
+                                                </button>
+                                            </div>
+                                            <div class="email-addto-box">
+                                                <ul class="add-to-links">
+                                                    <li><a class="link-wishlist"
+                                                           href="#"><span>Add to Wishlist</span></a></li>
+                                                    <li><span class="separator">|</span> <a class="link-compare"
+                                                                                            href="#"><span>Add to Compare</span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-share">
+                                        <div class="sendtofriend-print"><a href="javascript:print();"><i
+                                                class="fa fa-print"></i> Print</a> <a href="#"><i
+                                                class="fa fa-envelope-o fa-fw"></i> Send to a friend</a></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-collateral col-lg-12 col-sm-12 col-xs-12">
+                    <div class="add_info">
+                        <ul class="nav nav-tabs product-tabs" id="product-detail-tab">
+                            <li class="active"><a data-toggle="tab" href="#product_tabs_description"> Product
+                                Description </a></li>
+                        </ul>
+                        <div class="tab-content" id="productTabContent">
+                            <div class="tab-pane fade in active" id="product_tabs_description">
+                                <div class="std">
+                                    <p th:text="${oneAttr.miaoshu}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="popular_cruises1">
+    <div class="container">
+
+        <h2 class="animated">Scenic Recommendation</h2>
+
+        <br><br>
+
+        <div class="animated" data-animation="fadeIn" data-animation-delay="300" id="popular_wrapper">
+            <div id="popular_inner">
+                <div class="">
+                    <div id="popular">
+                        <div class="">
+                            <div class="carousel-box">
+                                <div class="inner">
+                                    <div class="carousel main" id="table_refresh" th:fragment="table_refresh">
+                                        <ul style="margin-left: 100px">
+                                            <li th:each="scenic:${scenics}">
+                                                <div class="popular">
+                                                    <div class="popular_inner">
+                                                        <figure>
+                                                            <img alt="" class="img-responsive"
+                                                                 th:src="@{${scenic.img}}"/>
+                                                            <div class="over">
+                                                                <div class="v1">Mediterranean
+                                                                    <span>17 Deal Offers</span></div>
+                                                                <div class="v2">Lorem ipsum dolor sit amet, concateus.
+                                                                </div>
+                                                            </div>
+                                                        </figure>
+                                                        <div class="caption">
+                                                            <div class="txt1"><span th:text="${scenic.name}"></span>
+                                                            </div>
+                                                            <span th:text="${scenic.price}"></span>
+                                                            <div class="txt2" th:text="${scenic.miaoshu}">
+                                                            </div>
+                                                            <div class="txt3 clearfix">
+                                                                <div class="left_side">
+                                                                    <div class="stars1">
+                                                                        <img alt=""
+                                                                             src="images/star1.png" th:src="@{/images/star1.png}">
+                                                                        <img alt=""
+                                                                             src="images/star1.png" th:src="@{/images/star1.png}">
+                                                                    </div>
+                                                                    <div class="nums">- 168 Reviews</div>
+                                                                </div>
+                                                                <div class="right_side"><a
+                                                                        class="btn-default btn1"
+                                                                        th:href="@{'/travel/oneAttr?id='+${scenic.id}}">Detail</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部-->
+<div th:include="common/index_footer :: copyfooter"></div>
+<script th:src="@{/js2/owl.carousel.min.js}"></script>
+<script th:src="@{/js2/main.js}">
+</script>
+</body>
+</html>

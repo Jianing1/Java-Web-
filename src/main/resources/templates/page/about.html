@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>关于我们</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Your description" name="description">
+    <meta content="Your keywords" name="keywords">
+    <meta content="Your name" name="author">
+    <link href="/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link href="/css/font-awesome.css" rel="stylesheet" th:href="@{/css/font-awesome.css}"/>
+    <link href="/css/animate.css" rel="stylesheet" th:href="@{/css/animate.css}"/>
+    <link href="/css/select2.css" rel="stylesheet" th:href="@{/css/select2.css}"/>
+    <link href="/css/smoothness/jquery-ui-1.10.0.custom.css" rel="stylesheet"
+          th:href="@{/css/smoothness/jquery-ui-1.10.0.custom.css}"/>
+    <link href="/css/style.css" rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <script src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+    <script src="/js/jquery-ui.js" th:src="@{/js/jquery-ui.js}"></script>
+    <script src="/js/jquery-migrate-1.2.1.min.js" th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+    <script src="/js/jquery.easing.1.3.js" th:src="@{/js/jquery.easing.1.3.js}"></script>
+    <script src="/js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+    <script src="/js/select2.js" th:src="@{/js/select2.js}"></script>
+    <script src="/js/jquery.parallax-1.1.3.resize.js" th:src="@{/js/jquery.parallax-1.1.3.resize.js}"></script>
+    <script src="/js/SmoothScroll.js" th:src="@{/js/SmoothScroll.js}"></script>
+    <script src="/js/jquery.appear.js" th:src="@{/js/jquery.appear.js}"></script>
+    <script src="/js/jquery.caroufredsel.js" th:src="@{/js/jquery.caroufredsel.js}"></script>
+    <script src="/js/jquery.touchSwipe.min.js" th:src="@{/js/jquery.touchSwipe.min.js}"></script>
+    <script src="/js/jquery.ui.totop.js" th:src="@{/js/jquery.ui.totop.js}"></script>
+    <script src="/js/script.js" th:src="@{/js/script.js}"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+</head>
+<body>
+<!-- head 头部 -->
+<div id="head" th:include="common/index_header :: copyheader"></div>
+
+<div class="parallax" id="parallax2">
+    <div class="bg2 parallax-bg"></div>
+    <div class="overlay"></div>
+    <div class="parallax-content">
+        <div class="container">
+        </div>
+    </div>
+</div>
+<div><img th:src="@{/images/about_banner.jpg}"></div>
+
+<div class="breadcrumbs1_wrapper">
+    <div class="container">
+        <div class="breadcrumbs1"><a href="view">首页</a><span>/</span>关于我们</div>
+    </div>
+</div>
+
+<div id="why1">
+    <div class="container">
+
+        <h2 class="animated">我们提供最好的服务</h2>
+
+        <div class="title1 animated">我们提供最好的服务</div>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="thumb2 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img alt="" class="img1 img-responsive" src="images/why1.png"
+                                     th:src="@{/images/why1.png}">
+                                <img alt="" class="img2 img-responsive" src="images/why1_hover.png"
+                                     th:src="@{/images/why1_hover.png}">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">美妙的旅途</div>
+                                <div class="txt2">美妙的旅途
+                                </div>
+                                <div class="txt3">更多</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img alt="" class="img1 img-responsive" src="images/why2.png"
+                                     th:src="@{/images/why2.png}">
+                                <img alt="" class="img2 img-responsive" src="images/why2_hover.png"
+                                     th:src="@{/images/why2_hover.png}">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">发现</div>
+                                <div class="txt2">发现
+                                </div>
+                                <div class="txt3">更多</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img alt="" class="img1 img-responsive" src="images/why3.png"
+                                     th:src="@{/images/why3.png}">
+                                <img alt="" class="img2 img-responsive" src="images/why3_hover.png"
+                                     th:src="@{/images/why3_hover.png}">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">预定旅途</div>
+                                <div class="txt2">预定旅途
+                                </div>
+                                <div class="txt3">更多</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img alt="" class="img1 img-responsive" src="images/why4.png"
+                                     th:src="@{/images/why4.png}">
+                                <img alt="" class="img2 img-responsive" src="images/why4_hover.png"
+                                     th:src="@{/images/why4_hover.png}">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">优质的人工服务</div>
+                                <div class="txt2">优质的人工服务</div>
+                                <div class="txt3">更多</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="what1">
+    <div class="container">
+
+        <h2 class="animated">我们提供什么 ?</h2>
+
+        <div class="title1 animated">旅行规划，车票预定，私人司机，私人司机<br>tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6 animated">
+                <ul class="ul2">
+                    <li><a href="#">旅行规划</a></li>
+                    <li><a href="#">车票预定</a></li>
+                    <li><a href="#">私人司机</a></li>
+                    <li><a href="#">私人司机</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-6 animated">
+                <blockquote class="blockquote0">
+                    4大服务助您开心！
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="company1">
+    <div class="container">
+        <h2 class="animated">关于我们公司</h2>
+        <div class="title1 animated">年轻有活力，有成熟的旅行解决方案</div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-md-push-6">
+                <div class="content">
+                    <div class="txt1 animated">规划出行方式</div>
+                    <div class="txt2 animated">我们更偏向于飞机出行，快速带您前往目的地</div>
+
+                    <div class="distance1 animated" data-animation="fadeInUp" data-animation-delay="0">
+                        <div class="txt">飞机</div>
+                        <div class="bg">
+                            <div class="animated-distance" data-animation-delay="0" data-duration="1300" data-num="45">
+                                <span></span></div>
+                        </div>
+                    </div>
+
+                    <div class="distance1 animated" data-animation="fadeInUp" data-animation-delay="100">
+                        <div class="txt">高铁</div>
+                        <div class="bg">
+                            <div class="animated-distance" data-animation-delay="100" data-duration="1300"
+                                 data-num="20"><span></span></div>
+                        </div>
+                    </div>
+
+                    <div class="distance1 animated" data-animation="fadeInUp" data-animation-delay="200">
+                        <div class="txt">汽车</div>
+                        <div class="bg">
+                            <div class="animated-distance" data-animation-delay="200" data-duration="1300"
+                                 data-num="25"><span></span></div>
+                        </div>
+                    </div>
+
+                    <div class="distance1 animated" data-animation="fadeInUp" data-animation-delay="300">
+                        <div class="txt">轮渡</div>
+                        <div class="bg">
+                            <div class="animated-distance" data-animation-delay="300" data-duration="1300"
+                                 data-num="10"><span></span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-md-pull-6">
+                <img alt="" class="img1 img-responsive animated" src="images/company1.png"
+                     th:src="@{/images/company1.png}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="team1">
+    <div class="container">
+        <h2 class="animated">我们团队</h2>
+        <div class="title1 animated">优秀的团队祝您旅行愉快！ <br>我们恭候您的光临</div>
+        <br>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="thumb3 animated" data-animation="flipInY" data-animation-delay="300">
+                    <div class="thumbnail clearfix">
+                        <figure class="">
+                            <img alt="" class="img-responsive" src="images/team01.jpg" th:src="@{/images/team01.jpg}">
+                            <div class="over">市场经理</div>
+                        </figure>
+                        <div class="caption">
+                            <div class="txt1">A</div>
+                            <div class="txt2">A is good</div>
+                            <div class="social_sm_wrapper">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb3 animated" data-animation="flipInY" data-animation-delay="400">
+                    <div class="thumbnail clearfix">
+                        <figure class="">
+                            <img alt="" class="img-responsive" src="images/team02.jpg" th:src="@{/images/team01.jpg}">
+                            <div class="over">CEO</div>
+                        </figure>
+                        <div class="caption">
+                            <div class="txt1">B</div>
+                            <div class="txt2">B is good</div>
+                            <div class="social_sm_wrapper">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb3 animated" data-animation="flipInY" data-animation-delay="500">
+                    <div class="thumbnail clearfix">
+                        <figure class="">
+                            <img alt="" class="img-responsive" src="images/team03.jpg" th:src="@{/images/team01.jpg}">
+                            <div class="over">董事长</div>
+                        </figure>
+                        <div class="caption">
+                            <div class="txt1">C</div>
+                            <div class="txt2">C is good</div>
+                            <div class="social_sm_wrapper">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb3 animated" data-animation="flipInY" data-animation-delay="600">
+                    <div class="thumbnail clearfix">
+                        <figure class="">
+                            <img alt="" class="img-responsive" src="images/team04.jpg" th:src="@{/images/team01.jpg}">
+                            <div class="over">行政总管</div>
+                        </figure>
+                        <div class="caption">
+                            <div class="txt1">D</div>
+                            <div class="txt2">D is good</div>
+                            <div class="social_sm_wrapper">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--底部-->
+<div th:include="common/index_footer :: copyfooter"></div>
+</body>
+</html>

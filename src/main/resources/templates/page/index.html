@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>首页</title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="Your description" name="description"/>
+    <meta content="Your keywords" name="keywords"/>
+    <meta content="Your name" name="author"/>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<!-- head 头部 -->
+<div id="head" th:include="common/index_header :: copyheader"></div>
+<div id="slider_wrapper">
+    <div class="container">
+        <div id="slider_inner">
+            <div id="slider">
+                <div class="carousel-box">
+                    <div class="inner">
+                        <div class="carousel main">
+                            <ul>
+                                <li th:each="carousel : ${carousels}">
+                                    <div class="slider">
+                                        <div class="slider_inner">
+                                            <div class="txt1"><span th:text="${carousel.title}"></span></div>
+                                            <div class="txt2"><span th:text="${carousel.comment}"></span></div>
+                                            <div class="txt3"><span th:text="${carousel.scenictime}"></span></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider_pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="front_tabs">
+    <div class="container">
+        <div class="tabs_wrapper tabs1_wrapper">
+            <div class="tabs tabs1">
+                <div class="tabs_tabs tabs1_tabs">
+                    <ul>
+                        <li class="active flights"><a href="#tabs-1">航班</a></li>
+                        <li class="hotels"><a href="#tabs-2">酒店</a></li>
+                        <li class="cars"><a href="#tabs-3">汽车</a></li>
+                        <li class="cruises"><a href="#tabs-4">轮渡</a></li>
+                    </ul>
+                </div>
+                <div class="tabs_content tabs1_content">
+
+                    <div id="tabs-1">
+                        <form action="javascript:" class="form1">
+                            <div class="row">
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>从：</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="2">北京</option>
+                                                <option value="3">上海</option>
+                                                <option value="4">新加坡</option>
+                                                <option value="5">加拿大</option>
+                                                <option value="6">纽约</option>
+                                                <option value="7">巴黎</option>
+                                                <option value="8">夏威夷</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>去：</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="2">北京</option>
+                                                <option value="3">上海</option>
+                                                <option value="4">新加坡</option>
+                                                <option value="5">加拿大</option>
+                                                <option value="6">纽约</option>
+                                                <option value="7">巴黎</option>
+                                                <option value="8">夏威夷</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="input1_wrapper">
+                                        <label>离开时间：</label>
+                                        <div class="input1_inner">
+                                            <input class="input datepicker" type="text" value="Mm/Dd/Yy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="input1_wrapper">
+                                        <label>返回时间：</label>
+                                        <div class="input1_inner">
+                                            <input class="input datepicker" type="text" value="Mm/Dd/Yy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-1">
+                                    <div class="select1_wrapper">
+                                        <label>成人</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select select3" style="width: 100%">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-1">
+                                    <div class="select1_wrapper">
+                                        <label>小孩：</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select select3" style="width: 100%">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="button1_wrapper">
+                                        <button class="btn-default btn-form1-submit" onclick="travel()" type="submit">
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tabs-2">
+                        <form action="javascript:" class="form1">
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="select1_wrapper">
+                                        <label>城市：</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="2">北京</option>
+                                                <option value="3">上海</option>
+                                                <option value="4">新加坡</option>
+                                                <option value="5">加拿大</option>
+                                                <option value="6">纽约</option>
+                                                <option value="7">巴黎</option>
+                                                <option value="8">夏威夷</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="input1_wrapper">
+                                        <label>入住时间</label>
+                                        <div class="input1_inner">
+                                            <input class="input datepicker" type="text" value="Mm/Dd/Yy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="input1_wrapper">
+                                        <label>离开时间：</label>
+                                        <div class="input1_inner">
+                                            <input class="input datepicker" type="text" value="Mm/Dd/Yy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>成人：</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="button1_wrapper">
+                                        <button class="btn-default btn-form1-submit" onclick="travel()" type="submit">
+                                            搜索
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tabs-3">
+                        <form action="javascript:" class="form1">
+                            <div class="row">
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>国家</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="2">中国</option>
+                                                <option value="3">美国</option>
+                                                <option value="4">法国</option>
+                                                <option value="5">加拿大</option>
+                                                <option value="6">瑞士</option>
+                                                <option value="7">俄罗斯</option>
+                                                <option value="8">巴西</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>城市</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="2">北京</option>
+                                                <option value="3">东京</option>
+                                                <option value="4">清迈</option>
+                                                <option value="5">多伦多</option>
+                                                <option value="6">纽约</option>
+                                                <option value="7">巴黎</option>
+                                                <option value="8">夏威夷</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>地点</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="2">北京</option>
+                                                <option value="3">东京</option>
+                                                <option value="4">新加坡</option>
+                                                <option value="5">多伦多</option>
+                                                <option value="6">纽约</option>
+                                                <option value="7">巴黎</option>
+                                                <option value="8">夏威夷</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="input1_wrapper">
+                                        <label>上车时间：</label>
+                                        <div class="input1_inner">
+                                            <input class="input datepicker" type="text" value="Mm/Dd/Yy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="input1_wrapper">
+                                        <label>下车时间:</label>
+                                        <div class="input1_inner">
+                                            <input class="input datepicker" type="text" value="Mm/Dd/Yy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="button1_wrapper">
+                                        <button class="btn-default btn-form1-submit" onclick="travel()" type="submit">
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tabs-4">
+                        <form action="javascript:" class="form1">
+                            <div class="row">
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>下船地点：</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="3">上海</option>
+                                                <option value="4">新加坡</option>
+                                                <option value="5">加拿大</option>
+                                                <option value="6">纽约</option>
+                                                <option value="7">巴黎</option>
+                                                <option value="8">夏威夷</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>登船地点：</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="3">上海</option>
+                                                <option value="4">新加坡</option>
+                                                <option value="5">加拿大</option>
+                                                <option value="6">纽约</option>
+                                                <option value="7">巴黎</option>
+                                                <option value="8">夏威夷</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="input1_wrapper">
+                                        <label>离开时间</label>
+                                        <div class="input1_inner">
+                                            <input class="input datepicker" type="text" value="From any month">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="input1_wrapper">
+                                        <label>到达时间：</label>
+                                        <div class="input1_inner">
+                                            <input class="input datepicker" type="text" value="To any month">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="select1_wrapper">
+                                        <label>船号：</label>
+                                        <div class="select1_inner">
+                                            <select class="select2 select" style="width: 100%">
+                                                <option value="1">ship1</option>
+                                                <option value="2">ship2</option>
+                                                <option value="3">ship3</option>
+                                                <option value="4">ship4</option>
+                                                <option value="5">ship5</option>
+                                                <option value="6">ship6</option>
+                                                <option value="7">ship7</option>
+                                                <option value="8">ship8</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <div class="button1_wrapper">
+                                        <button class="btn-default btn-form1-submit" onclick="travel()" type="submit">
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="why1">
+    <div class="container">
+        <h2 class="animated">为什么我们是最好的</h2>
+        <div class="title1 animated">我们拥有最好的旅游路线，有最优质的服务，保证让您玩的开心.
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="thumb2 animated" data-animation="flipInY" data-animation-delay="200">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img alt="" class="img1 img-responsive" src="images/why1.png"
+                                     th:src="@{/images/why1.png}">
+                                <img alt="" class="img2 img-responsive" src="images/why1_hover.png"
+                                     th:src="@{/images/why1_hover.png}">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">优质的旅行资源</div>
+                                <div class="txt2">优质的旅行资源
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated" data-animation="flipInY" data-animation-delay="300">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img alt="" class="img1 img-responsive" src="images/why2.png"
+                                     th:src="@{/images/why2.png}">
+                                <img alt="" class="img2 img-responsive" src="images/why2_hover.png"
+                                     th:src="@{/images/why2_hover.png}">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">发现</div>
+                                <div class="txt2">发现.
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated" data-animation="flipInY" data-animation-delay="400">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img alt="" class="img1 img-responsive" src="/images/why3.png">
+                                <img alt="" class="img2 img-responsive" src="/images/why3_hover.png">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">预定行程</div>
+                                <div class="txt2">预定行程.
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="thumb2 animated" data-animation="flipInY" data-animation-delay="500">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure class="">
+                                <img alt="" class="img1 img-responsive" src="images/why4.png"
+                                     th:src="@{/images/why4.png}">
+                                <img alt="" class="img2 img-responsive" src="images/why4_hover.png"
+                                     th:src="@{/images/why4_hover.png}">
+                            </figure>
+                            <div class="caption">
+                                <div class="txt1">很好的支持</div>
+                                <div class="txt2">很好的支持
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="parallax" id="parallax1">
+    <div class="bg1 parallax-bg"></div>
+    <div class="overlay"></div>
+    <div class="parallax-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 animated">
+                    <div class="txt1">请注意，这是您旅行绝佳的机会！</div>
+                    <div class="txt2">请注意，这是您旅行绝佳的机会！</div>
+                    <div class="txt3">形影旅行社 <strong>￥100起</strong><span>每人</span></div>
+                </div>
+                <div class="col-sm-2 animated">
+                    <a class="btn-default btn0" href="#">详情</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="popular_cruises1">
+    <div class="container">
+        <h2 class="animated">推荐游览</h2>
+        <div class="title1 animated">这里是我们的明星路线
+        </div>
+        <br><br>
+        <div class="animated" data-animation="fadeIn" data-animation-delay="300" id="popular_wrapper">
+            <div id="popular_inner">
+                <div class="">
+                    <div id="popular">
+                        <div class="">
+                            <div class="carousel-box">
+                                <div class="inner">
+                                    <div class="carousel main">
+                                        <ul>
+                                            <li>
+                                                <div class="popular">
+                                                    <div class="popular_inner">
+                                                        <figure>
+                                                            <img alt=""
+                                                                 class="img-responsive" src="/images/popular01.jpg"
+                                                                 th:src="@{/images/popular01.jpg}">
+                                                            <div class="over">
+                                                                <div class="v1">
+                                                                    巴拿马运河 <span>推荐旅途</span>
+                                                                </div>
+                                                                <div class="v2">享受热带雨林的旺盛活力
+                                                                </div>
+                                                            </div>
+                                                        </figure>
+                                                        <div class="caption">
+                                                            <div class="txt1"><span>巴拿马运河</span> 7天旅行</div>
+                                                            <div class="txt2">享受热带雨林的旺盛活力
+                                                            </div>
+                                                            <div class="txt3 clearfix">
+                                                                <div class="left_side">
+                                                                    <div class="stars1">
+                                                                        <img alt=""
+                                                                             src="images/star1.png" th:src="@{/images/star1.png}">
+                                                                        <img alt=""
+                                                                             src="images/star1.png" th:src="@{/images/star1.png}">
+                                                                        <img alt=""
+                                                                             src="images/star1.png" th:src="@{/images/star1.png}">
+
+                                                                    </div>
+                                                                    <div class="nums">- 18人评价</div>
+                                                                </div>
+                                                                <div class="right_side">
+                                                                    <a class="btn-default btn1" href="#">更多</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="popular">
+                                                    <div class="popular_inner">
+                                                        <figure>
+                                                            <img alt=""
+                                                                 class="img-responsive" src="images/popular02.jpg"
+                                                                 th:src="@{/images/popular02.jpg}">
+                                                            <div class="over">
+                                                                <div class="v1">地中海
+                                                                    <span>优惠促销</span></div>
+                                                                <div class="v2">享受宁静的大海和蔚蓝的天空
+                                                                </div>
+                                                            </div>
+                                                        </figure>
+                                                        <div class="caption">
+                                                            <div class="txt1"><span>地中海</span> 18天旅行
+                                                            </div>
+                                                            <div class="txt2">享受宁静的大海和蔚蓝的天空
+                                                            </div>
+                                                            <div class="txt3 clearfix">
+                                                                <div class="left_side">
+                                                                    <div class="stars1">
+                                                                        <img alt=""
+                                                                             src="images/star1.png" th:src="@{/images/star1.png}">
+
+                                                                    </div>
+                                                                    <div class="nums">- 168人评价</div>
+                                                                </div>
+                                                                <div class="right_side">
+                                                                    <a class="btn-default btn1" href="#">更多</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="popular">
+                                                    <div class="popular_inner">
+                                                        <figure>
+                                                            <img alt=""
+                                                                 class="img-responsive" src="images/popular02.jpg"
+                                                                 th:src="@{/images/popular02.jpg}">
+                                                            <div class="over">
+                                                                <div class="v1">夏威夷
+                                                                    <span>优惠多多</span></div>
+                                                                <div class="v2">灿烂的阳光和美妙的沙滩
+                                                                </div>
+                                                            </div>
+                                                        </figure>
+                                                        <div class="caption">
+                                                            <div class="txt1"><span>夏威夷</span> 20天旅行
+                                                            </div>
+                                                            <div class="txt2">灿烂的阳光和美妙的沙滩
+                                                            </div>
+                                                            <div class="txt3 clearfix">
+                                                                <div class="left_side">
+                                                                    <div class="stars1">
+                                                                        <img alt=""
+                                                                             src="images/star1.png" th:src="@{/images/star1.png}">
+                                                                        <img alt=""
+                                                                             src="images/star1.png" th:src="@{/images/star1.png}">
+
+                                                                    </div>
+                                                                    <div class="nums">- 152 评价</div>
+                                                                </div>
+                                                                <div class="right_side">
+                                                                    <a class="btn-default btn1" href="#">更多</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popular_pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="happy1">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-md-push-6">
+                <div class="content">
+                    <div class="txt1 animated" data-animation="fadeIn" data-animation-delay="100">客户对服务的满意度</div>
+                    <div class="txt2 animated" data-animation="fadeIn" data-animation-delay="150">客户很欣赏我们的服务和旅程设计</div>
+                    <div class="txt3 animated" data-animation="fadeIn" data-animation-delay="200">
+                        <p>
+                            尊重客户，理解客户，为客户创造价值，是我们的服务宗旨，全心全力、尽心尽责为客户排忧解难是我们的服务理念。我们要用“心”去沟通，用“六心”去服务。
+                        </p>
+                        <p>
+                            这是我们的服务宗旨：
+                            一、关心和爱心：站在客户角度，把握客户的心情和需求，急客户之所急；提前为客户想到问题，把问题处理在萌芽状态中，防止问题的扩大。
+                            二、诚心和细心：发自内心地视客户为自己的衣食父母；细致入微体贴客户，为客户办一些实事，让客户感觉到你存在的重要性。
+                            三、用心和恒心：用心极致地对待和完成每项工作和服务，对于客户的每一件咨询请求、申告、投诉等要做到处处有着落，事事有人管；视服务为事业，质量为生命，持之以恒。
+                        </p>
+                    </div>
+
+                    <div class="distance1 animated" data-animation="fadeInUp" data-animation-delay="0">
+                        <div class="txt">航班</div>
+                        <div class="bg">
+                            <div class="animated-distance" data-animation-delay="0" data-duration="1300" data-num="94">
+                                <span></span></div>
+                        </div>
+                    </div>
+
+                    <div class="distance1 animated" data-animation="fadeInUp" data-animation-delay="100">
+                        <div class="txt">酒店</div>
+                        <div class="bg">
+                            <div class="animated-distance" data-animation-delay="100" data-duration="1300"
+                                 data-num="87"><span></span></div>
+                        </div>
+                    </div>
+
+                    <div class="distance1 animated" data-animation="fadeInUp" data-animation-delay="200">
+                        <div class="txt">汽车旅途</div>
+                        <div class="bg">
+                            <div class="animated-distance" data-animation-delay="200" data-duration="1300"
+                                 data-num="90"><span></span></div>
+                        </div>
+                    </div>
+
+                    <div class="distance1 animated" data-animation="fadeInUp" data-animation-delay="300">
+                        <div class="txt">轮渡</div>
+                        <div class="bg">
+                            <div class="animated-distance" data-animation-delay="300" data-duration="1300"
+                                 data-num="95"><span></span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-md-pull-6 animated" data-animation="fadeInLeft"
+                 data-animation-delay="200">
+                <img alt="" class="img1 img-responsive" src="images/people.png" th:src="@{/images/people.png}">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="partners">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-md-2 col-xs-6">
+                <div class="thumb1 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure>
+                                <img alt="" class="img1 img-responsive" src="images/partner1.jpg"
+                                     th:src="@{/images/partner1.jpg}">
+                                <img alt="" class="img2 img-responsive" src="images/partner1_hover.jpg"
+                                     th:src="@{/images/partner1_hover.jpg}">
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-xs-6">
+                <div class="thumb1 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure>
+                                <img alt="" class="img1 img-responsive" src="images/partner2.jpg"
+                                     th:src="@{/images/partner2.jpg}">
+                                <img alt="" class="img2 img-responsive" src="images/partner2_hover.jpg"
+                                     th:src="@{/images/partner2_hover.jpg}">
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-xs-6">
+                <div class="thumb1 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure>
+                                <img alt="" class="img1 img-responsive" src="images/partner3.jpg"
+                                     th:src="@{/images/partner3.jpg}">
+                                <img alt="" class="img2 img-responsive" src="images/partner3_hover.jpg"
+                                     th:src="@{/images/partner3_hover.jpg}">
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-xs-6">
+                <div class="thumb1 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure>
+                                <img alt="" class="img1 img-responsive" src="images/partner4.jpg"
+                                     th:src="@{/images/partner4.jpg}">
+                                <img alt="" class="img2 img-responsive" src="images/partner4_hover.jpg"
+                                     th:src="@{/images/partner4_hover.jpg}">
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-xs-6">
+                <div class="thumb1 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure>
+                                <img alt="" class="img1 img-responsive" src="images/partner5.jpg"
+                                     th:src="@{/images/partner5.jpg}">
+                                <img alt="" class="img2 img-responsive" src="images/partner5_hover.jpg"
+                                     th:src="@{/images/partner5_hover.jpg}">
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-xs-6">
+                <div class="thumb1 animated">
+                    <div class="thumbnail clearfix">
+                        <a href="#">
+                            <figure>
+                                <img alt="" class="img1 img-responsive" src="images/partner6.jpg"
+                                     th:src="@{/images/partner6.jpg}">
+                                <img alt="" class="img2 img-responsive" src="images/partner6_hover.jpg"
+                                     th:src="@{/images/partner6_hover.jpg}">
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<div th:include="common/index_footer :: copyfooter"></div>
+</body>
+<script>
+    function travel() {
+        window.location.href = "/dist/travel"
+    }
+</script>
+
+</html>

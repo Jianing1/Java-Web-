@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>景点列表</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          name="viewport">
+    <link media="all" rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}">
+    <link media="all" rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">景点列表</div>
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="test-table-reload" lay-filter="test-table-reload"></table>
+                    <script id="barlist" type="text/html">
+                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/layuiadmin/layui/layui.js}"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+        //方法级渲染
+        table.render({
+            elem: '#test-table-reload'
+            , url: 'http://localhost:8080/scenic'
+            , cols: [
+                [
+                    {checkbox: true, fixed: true}
+                    , {field: 'name', title: '景点名称', width: 180, align: 'center', edit: 'text'}
+                    , {field: 'price', title: '价格', width: 100, align: 'center', sort: true, edit: 'text'}
+                    , {field: 'start', title: '评分', width: 100, sort: true, align: 'center'}
+                    , {field: 'stock', title: '库存', width: 100, align: 'center', sort: true, edit: 'text'}
+                    , {
+                    field: 'miaoshu',
+                    title: '景点描述',
+                    width: 200,
+                    align: 'center',
+                    event: 'setSign',
+                    style: 'cursor: pointer;'
+                }
+                    , {
+                    field: 'comment',
+                    title: '详细介绍',
+                    width: 180,
+                    align: 'center',
+                    event: 'setSign',
+                    style: 'cursor: pointer;'
+                }
+                    , {field: 'contry', title: '所在地', width: 202, align: 'center', sort: true}
+                    , {width: 136, title: '操作', align: 'center', toolbar: '#barlist'}
+                ]
+            ]
+            , page: true
+            , height: 470
+            , id: 'testReload'
+        });
+
+        //监听工具条
+        table.on('tool(test-table-reload)', function (obj) {
+            var data = obj.data;
+
+            if (obj.event === 'detail') {
+                layer.msg('ID：' + data.id + ' 的查看操作');
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del();
+                    layer.close(index);
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/scenic/" + data.id,
+                        data: {"id": data.id},
+                        dataType: "json",
+                        contentType: "application/json;charset=utf-8",
+                        success: function (result) {
+                            if (result.code == 0) {
+                                layer.msg(result.message, {icon: 1});
+                            } else {
+                                layer.msg(result.message, {
+                                    icon: 5
+                                });
+                            }
+                        }
+                    });
+                });
+            } else if (obj.event === 'edit') {
+                layer.confirm('<div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">名称</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="title" id="title" required  lay-verify="required" value="' + data.name + '" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                    '    </div>\n' +
+                    '  </div>' +
+                    '<div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">价格</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="price" id="price" required  lay-verify="required" value="' + data.price + '" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                    '    </div>\n' +
+                    '  </div>' +
+                    '<div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">描述</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="miaoshu" id="miaoshu" required  lay-verify="required" value="' + data.miaoshu + '" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                    '    </div>\n' +
+                    '  </div>' +
+                    '<div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">详情</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="comment" required id="comment"  lay-verify="required" value="' + data.comment + '" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                    '    </div>\n' +
+                    '  </div>' +
+                    '<div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">库存</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="stock" id="stock" required  lay-verify="required" value="' + data.stock + '" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                    '    </div>\n' +
+                    '  </div>' +
+                    '<div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">评分</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="start" id="start" required  lay-verify="required" value="' + data.start + '" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                    '    </div>\n' +
+                    '  </div>' +
+                    '<div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">所在地</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <input type="text" name="contry" id="contry" required  lay-verify="required" value="' + data.contry + '" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                    '    </div>\n' +
+                    '  </div>', {btn: ['确定', '取消']}, function (index, layero) {
+                    var title = $("#title").val()
+                    var price = $("#price").val()
+                    var miaoshu = $("#miaoshu").val()
+                    var comment = $("#comment").val()
+                    var stock = $("#stock").val()
+                    var start = $("#start").val()
+                    var contry = $("#contry").val()
+                    console.log("====--===" + title + '\n' + price + '\n' + miaoshu + '\n' + comment + '\n' + stock + '\n' + start + '\n' + contry)
+
+                    $.ajax({
+                        type: "PUT",
+                        url: "/scenic/" + data.id,
+                        data: JSON.stringify({
+                            "name": title,
+                            "price": price,
+                            "miaoshu": miaoshu,
+                            "comment": comment,
+                            "stock": stock,
+                            "start": start,
+                            "contry": contry
+                        }),
+                        dataType: "json",
+                        contentType: "application/json;charset=utf-8",
+                        success: function (result) {
+                            if (result.code == 0) {
+                                layer.msg(result.message, {icon: 1});
+                            } else {
+                                layer.msg(result.message, {
+                                    icon: 5
+                                });
+                            }
+                        }
+                    });
+                })
+            } else if (obj.event === 'setSign') {
+                layer.prompt({
+                    formType: 2
+                    , title: '修改 ID 为 [' + data.id + '] 的景点描述'
+                    , value: data.sign
+                }, function (value, index) {
+
+                    alert("修改后" + value)
+                    layer.close(index);
+                    //这里一般是发送修改的Ajax请求
+
+
+                    //同步更新表格和缓存对应的值
+                    obj.update({
+                        sign: value
+                    });
+                });
+            }
+        });
+        //搜索加载--数据表格重载
+        var $ = layui.$, active = {
+            reload: function () {
+                //执行重载
+                table.reload('userTables', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        searContent: $("input[name=searContent]").val()
+                    }
+                });
+            }
+        };
+        $('#searchEmailCompany').on('click', function () {
+            ids = [];
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        element.init();
+        $('.test-table-reload-btn .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+</body>
+</html>

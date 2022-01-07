@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>行影旅游网</title>
+</head>
+<body>
+<footer th:fragment="copyfooter">
+    <div class="bot1_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="logo2_wrapper">
+                        <a class="logo2" href="view">
+                            <img alt="" class="img-responsive" th:src="@{/images/logo2.png}">
+                        </a>
+                    </div>
+                    <p>
+                        我们成立于2021年，是有活力的旅行社！我们的宗旨是给用户最好的体验！
+                    </p>
+                    <p>
+                        <a class="btn-default btn2" href="#">了解更多</a>
+                    </p>
+                </div>
+                <div class="col-sm-3">
+                    <div class="bot1_title">旅行特色</div>
+                    <ul class="ul1">
+                        <li><a href="#">头等舱和专车接送</a></li>
+                        <li><a href="#">随心所欲的旅途</a></li>
+                        <li><a href="#">绝妙的轮渡景色</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <div class="bot1_title">微博</div>
+                    <div class="twits1">
+                        <div class="twit1">
+                            <a href="#"> @travel</a> 气候温和宜人的海南之旅开始了！赶快来报名吧！
+                            <div class="date">5 分钟前</div>
+                        </div>
+                        <div class="twit1">
+                            <a href="#">@leo</a> 西双版纳之行圆满结束，欢迎各位下次光临！
+                            <div class="date">2 天前</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="bot1_title">意见反馈</div>
+                    <div class="newsletter_block">
+                        <div class="txt1">灵感，意见，建议，反馈等欢迎发邮件</div>
+                        <div class="newsletter-wrapper clearfix">
+                            <form action="javascript:" class="newsletter">
+                                <input name="s" onBlur="if(this.value=='') this.value='Email Address'" onFocus="if(this.value =='Email Address' ) this.value=''"
+                                       type="text"
+                                       value='Email Address'>
+                                <a class="btn-default btn3" href="#">提交</a>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="phone2">123456789</div>
+                    <div class="support1"><a href="#">1465088322@qq.com</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bot2_wrapper">
+        <div class="container">
+            <div class="left_side">
+                Copyright &copy; 2021.henu Jianning All rights reserved.</a>
+            </div>
+            <div class="right_side"></div>
+        </div>
+    </div>
+
+</footer>
+</body>
+</html>

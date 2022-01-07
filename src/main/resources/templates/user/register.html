@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          name="viewport">
+    <link href="../../layuiadmin/layui/css/layui.css" media="all" rel="stylesheet"
+          th:href="@{/layuiadmin/layui/css/layui.css}">
+    <link href="../../layuiadmin/style/admin.css" media="all" rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}">
+    <link href="../../layuiadmin/style/login.css" media="all" rel="stylesheet" th:href="@{/layuiadmin/style/login.css}">
+</head>
+<body>
+<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+    <div class="layadmin-user-login-main">
+        <div class="layadmin-user-login-box layadmin-user-login-header">
+            <h2>用户注册</h2>
+            <p>欢迎注册行影旅行社</p>
+        </div>
+        <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-cellphone"
+                       for="LAY-user-login-cellphone"></label>
+                <input class="layui-input" id="LAY-user-login-cellphone" lay-verify="phone" name="mobile" placeholder="手机"
+                       type="text">
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-row">
+                    <div class="layui-col-xs7">
+                        <label class="layadmin-user-login-icon layui-icon layui-icon-vercode"
+                               for="LAY-user-login-vercode"></label>
+                        <input class="layui-input" id="LAY-user-login-vercode" lay-verify="required" name="code"
+                               placeholder="验证码" type="text">
+                    </div>
+                    <div class="layui-col-xs5">
+                        <div style="margin-left: 10px;">
+                            <button class="layui-btn layui-btn-primary layui-btn-fluid" id="LAY-user-getsmscode"
+                                    type="button">获取验证码
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                       for="LAY-user-login-password"></label>
+                <input class="layui-input" id="LAY-user-login-password" lay-verify="pass" name="password" placeholder="密码"
+                       type="password">
+            </div>
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                       for="LAY-user-login-repass"></label>
+                <input class="layui-input" id="LAY-user-login-repass" lay-verify="required" name="repass" placeholder="确认密码"
+                       type="password">
+            </div>
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-username"
+                       for="LAY-user-login-nickname"></label>
+                <input class="layui-input" id="LAY-user-login-nickname" lay-verify="nickname" name="name" placeholder="姓名"
+                       type="text">
+            </div>
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-logo" for="LAY-user-login-email"></label>
+                <input class="layui-input" id="LAY-user-login-email" lay-verify="email" name="email" placeholder="邮箱"
+                       type="text">
+            </div>
+            <div class="layui-form-item">
+                <input checked lay-skin="primary" name="agreement" title="同意用户协议" type="checkbox">
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn layui-btn-fluid" lay-filter="LAY-user-reg-submit" lay-submit>注 册</button>
+            </div>
+            <div class="layui-trans layui-form-item layadmin-user-login-other">
+                <label>社交账号注册</label>
+                <a href="javascript:"><i class="layui-icon layui-icon-login-qq"></i></a>
+                <a href="javascript:"><i class="layui-icon layui-icon-login-wechat"></i></a>
+                <a href="javascript:"><i class="layui-icon layui-icon-login-weibo"></i></a>
+                <a class="layadmin-user-jump-change layadmin-link layui-hide-xs" href="login">用已有帐号登入</a>
+                <a class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block"
+                   href="login">登入</a>
+            </div>
+        </div>
+    </div>
+    <div class="layui-trans layadmin-user-login-footer">
+        <p>© 2021 <a href="/dist/view" target="_blank">xingying.com</a></p>
+    </div>
+</div>
+
+<script src="../../layuiadmin/layui/layui.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    $(function () {
+        $("#LAY-user-login-cellphone").blur(function () {
+            var mobile = document.getElementsByName("mobile")[0];
+            var object = {}; //创建一个存放数据的对象
+            object["mobile"] = mobile.value;
+            var jsonData = JSON.stringify(object); //根据数据生成json数据
+            $.ajax({
+                url: "/user/register/",
+                data: jsonData,
+                contentType: "application/json;charset=UTF-8", //发送数据的格式
+                type: "post",
+                dataType: "json", //回调
+                beforeSend: function () {//ajax发送请求时的操作，得到请求结果前有效
+                    layer.load(0, {shade: false});
+                },
+                complete: function () { //ajax得到请求结果后的操作
+                    layer.closeAll('loading');
+                },
+                success: function (data) {
+                    if (data.code == 201) {
+                        layer.msg("您想要注册的手机号已经存在", {
+                            time: 2500,
+                            icon: 2,
+                            offset: '50px'
+                        });
+                    } else if (data.code == 204) {
+                        layer.msg("请输入正确的手机号");
+                    } else {
+                        layer.msg("手机号可以注册");
+                    }
+                }
+            });
+        });
+    });
+    //检验邮箱
+    $(function () {
+        $("#LAY-user-login-email").blur(function () {
+            var email = document.getElementsByName("email")[0];
+            var object = {}; //创建一个存放数据的对象
+            object["email"] = email.value;
+            var jsonData = JSON.stringify(object); //根据数据生成json数据
+            $.ajax({
+                url: "/user/email/",
+                data: jsonData,
+                contentType: "application/json;charset=UTF-8", //发送数据的格式
+                type: "post",
+                dataType: "json", //回调
+                beforeSend: function () {//ajax发送请求时的操作，得到请求结果前有效
+                    layer.load(0, {shade: false});
+                },
+                complete: function () { //ajax得到请求结果后的操作
+                    layer.closeAll('loading');
+                },
+                success: function (data) {
+                    if (data.code == 201) {
+                        layer.msg("您想要注册的邮箱已经存在", {
+                            time: 2500,
+                            icon: 2,
+                            offset: '50px'
+                        });
+                    } else {
+                        layer.msg("邮箱可以注册");
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script>
+    layui.config({
+        base: '../../layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'user'], function () {
+        var $ = layui.$
+            , setter = layui.setter
+            , admin = layui.admin
+            , form = layui.form
+            , router = layui.router();
+        form.render();
+        //提交
+        form.on('submit(LAY-user-reg-submit)', function (obj) {
+            var field = obj.field;
+
+            //确认密码
+            if (field.password !== field.repass) {
+                return layer.msg('两次密码输入不一致');
+            }
+            //是否同意用户协议
+            if (!field.agreement) {
+                return layer.msg('你必须同意用户协议才能注册');
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/user/register/" + obj.field.code,
+                data: JSON.stringify(obj.field),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.code == 0) {
+                        //登入成功的提示与跳转
+                        layer.msg('注册成功', {
+                            offset: '15px',
+                            icon: 1,
+                            time: 1000
+                        }, function () {
+                            location.href = '/dist/view'; //首页
+                        });
+                    } else {
+                        layer.msg(result.message, {
+                            icon: 5
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
